@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Resep Mami</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="search">Search</string>
+    <string name="title_activity_detail_makanan">DetailMakananActivity</string>
+    <string name="share">Share</string>
+    <string name="foodvorite">Foodvorite</string>
+    <string name="top_food">Top Food</string>
+    <string name="info">Info</string>
+    <string name="home">Home</string>
+    <string name="share_action">Share action</string>
+    <string name="nama_makanan">Nama makanan: </string>
+    <string name="download_resep_makanan">Download resep makanan:</string>
+    <string name="selamat_menikmati">Selamat menikmati resep mami!</string>
+    <string name="share_using">Share with</string>
+    <string name="loading">Loading...</string>
+</resources>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:apps="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignWithParentIfMissing="true"
+    android:layout_margin="3dp"
+    android:elevation="5dp"
+    app:cardCornerRadius="4dp"
+    apps:targetApi="lollipop">
+
+    <ImageView
+        android:id="@+id/image_poster"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_image_dummy" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="bottom">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#b1ffffff"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/title_food"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_weight="2"
+                android:textColor="@android:color/black"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                apps:text="AYAM RICA-RICA" />
+
+            <com.varunest.sparkbutton.SparkButton
+                android:id="@+id/spark_button"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:sparkbutton_activeImage="@drawable/ic_favorite"
+                app:sparkbutton_iconSize="24dp"
+                app:sparkbutton_inActiveImage="@drawable/ic_favorite_border"
+                app:sparkbutton_primaryColor="@color/colorRed"
+                app:sparkbutton_secondaryColor="@color/colorRedDark" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/image_poster"-->
+            <!--android:layout_width="56dp"-->
+            <!--android:layout_height="56dp"-->
+            <!--android:scaleType="fitXY"-->
+            <!--android:src="@drawable/ic_image_dummy" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/title_food"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="8dp"-->
+            <!--android:layout_marginTop="16dp"-->
+            <!--android:layout_toEndOf="@id/image_poster"-->
+            <!--android:textColor="@android:color/black"-->
+            <!--android:textSize="12sp"-->
+            <!--android:textStyle="bold"-->
+            <!--apps:text="AYAM RICA-RICA" />-->
+
+        <!--<com.varunest.sparkbutton.SparkButton-->
+            <!--android:id="@+id/spark_button"-->
+            <!--android:layout_width="40dp"-->
+            <!--android:layout_height="39dp"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:layout_marginEnd="8dp"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--app:sparkbutton_activeImage="@drawable/ic_favorite"-->
+            <!--app:sparkbutton_iconSize="24dp"-->
+            <!--app:sparkbutton_inActiveImage="@drawable/ic_favorite_border"-->
+            <!--app:sparkbutton_primaryColor="@color/colorRed"-->
+            <!--app:sparkbutton_secondaryColor="@color/colorRedDark" />-->
+    <!--</RelativeLayout>-->
+</android.support.v7.widget.CardView>
