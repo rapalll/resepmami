@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import dev.ri0arjuna.resepmamiapps.ModelTopFood;
+import dev.ri0arjuna.resepmamiapps.model.ModelTopFood;
 import dev.ri0arjuna.resepmamiapps.R;
 import dev.ri0arjuna.resepmamiapps.adapter.AdapterTopView;
 
@@ -81,17 +81,17 @@ public class TopFoodActivity extends AppCompatActivity {
                     ModelTopFood value = dataSnapshot1.getValue(ModelTopFood.class);
                     ModelTopFood fire = new ModelTopFood();
 
-                    nama_makanan = value != null ? value.getNama_makanan() : null;
-                    gambar_makanan = value != null ? value.getGambar_makanan() : null;
-                    resep_makanan = value != null ? value.getResep_makanan() : null;
-                    id = value != null ? value.getId() : 0;
-                    favorited = value != null ? value.getFavorited() : 0;
+                    nama_makanan = value != null ? value.getNameFood() : null;
+                    gambar_makanan = value != null ? value.getImageFood() : null;
+                    resep_makanan = value != null ? value.getRecipeFood() : null;
+                    id = value != null ? value.getIdFood() : 0;
+                    favorited = value != null ? value.getFavoritedFood() : 0;
 
-                    fire.setNama_makanan(nama_makanan);
-                    fire.setGambar_makanan(gambar_makanan);
-                    fire.setResep_makanan(resep_makanan);
-                    fire.setId(id);
-                    fire.setFavorited(favorited);
+                    fire.setNameFood(nama_makanan);
+                    fire.setImageFood(gambar_makanan);
+                    fire.setRecipeFood(resep_makanan);
+                    fire.setIdFood(id);
+                    fire.setFavoritedFood(favorited);
 
                     makananList.add(fire);
 

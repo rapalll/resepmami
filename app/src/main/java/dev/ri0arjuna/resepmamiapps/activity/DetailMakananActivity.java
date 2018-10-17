@@ -8,20 +8,14 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.github.barteksc.pdfviewer.PDFView;
-import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
 import com.google.gson.GsonBuilder;
-import com.mikepenz.actionitembadge.library.ActionItemBadge;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -31,11 +25,11 @@ import java.net.URL;
 import java.util.Objects;
 
 import dev.ri0arjuna.resepmamiapps.R;
-import dev.ri0arjuna.resepmamiapps.model.ModelMakanan;
+import dev.ri0arjuna.resepmamiapps.model.ModelFood;
 
 public class DetailMakananActivity extends AppCompatActivity {
     Toolbar toolbar;
-    ModelMakanan modelMakanan;
+    ModelFood modelMakanan;
     Uri uri;
     PDFView resepMakanan;
     ProgressDialog progressDialog;
@@ -48,9 +42,9 @@ public class DetailMakananActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         resepMakanan = findViewById(R.id.pdfView);
 
-        modelMakanan = new GsonBuilder().create().fromJson(getIntent().getStringExtra("detail_makanan"), ModelMakanan.class);
+        modelMakanan = new GsonBuilder().create().fromJson(getIntent().getStringExtra("detail_makanan"), ModelFood.class);
 
-        String str = modelMakanan.getNama_makanan();
+        String str = modelMakanan.getNameFood();
         String[] strArray = str.split(" ");
         StringBuilder builder = new StringBuilder();
         for (String s : strArray) {
@@ -69,7 +63,7 @@ public class DetailMakananActivity extends AppCompatActivity {
             Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         }
 
-        uri = Uri.parse(modelMakanan.getResep_makanan());
+        uri = Uri.parse(modelMakanan.getRecipeFood());
 //        Toast.makeText(this, ""+modelMakanan.getId(), Toast.LENGTH_SHORT).show();
 
         progressDialog = new ProgressDialog(this);
@@ -93,7 +87,7 @@ public class DetailMakananActivity extends AppCompatActivity {
             Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
             sharingIntent.setType("text/plain");
             sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT,
-                    getResources().getString(R.string.nama_makanan) + modelMakanan.getNama_makanan().toUpperCase() + "\n" +
+                    getResources().getString(R.string.nama_makanan) + modelMakanan.getNameFood().toUpperCase() + "\n" +
                             getResources().getString(R.string.download_resep_makanan) + uri + "\n\n" +
                             getResources().getString(R.string.selamat_menikmati));
             startActivity(Intent.createChooser(sharingIntent, getResources().getString(R.string.share_using)));

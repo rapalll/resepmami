@@ -5,18 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.support.design.widget.Snackbar;
-import android.widget.LinearLayout;
-import android.widget.Toast;
-
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import dev.ri0arjuna.resepmamiapps.model.ModelMakanan;
+import dev.ri0arjuna.resepmamiapps.model.ModelFood;
 
 public class DBase extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "db_favorite";
@@ -53,23 +46,23 @@ public class DBase extends SQLiteOpenHelper {
     /**
      * Query records, give options to filter results
      **/
-    public List<ModelMakanan> makananList() {
+    public List<ModelFood> makananList() {
         String query;
         query = "SELECT * FROM " + TABLE_NAME + " ORDER BY " + COLUMN_NAMA_MAKANAN + " ASC";
 
-        List<ModelMakanan> makananLinkedList = new LinkedList<>();
+        List<ModelFood> makananLinkedList = new LinkedList<>();
         SQLiteDatabase db = this.getWritableDatabase();
         @SuppressLint("Recycle") Cursor cursor = db.rawQuery(query, null);
-        ModelMakanan modelMakanan;
+        ModelFood modelMakanan;
 
         if (cursor.moveToFirst()) {
             do {
-                modelMakanan = new ModelMakanan();
+                modelMakanan = new ModelFood();
 
-                modelMakanan.setId(cursor.getInt(cursor.getColumnIndex(COLUMN_ID)));
-                modelMakanan.setNama_makanan(cursor.getString(cursor.getColumnIndex(COLUMN_NAMA_MAKANAN)));
-                modelMakanan.setGambar_makanan(cursor.getString(cursor.getColumnIndex(COLUMN_GAMBAR_MAKANAN)));
-                modelMakanan.setResep_makanan(cursor.getString(cursor.getColumnIndex(COLUMN_RESEP_MAKANAN)));
+                modelMakanan.setIdFood(cursor.getInt(cursor.getColumnIndex(COLUMN_ID)));
+                modelMakanan.setNameFood(cursor.getString(cursor.getColumnIndex(COLUMN_NAMA_MAKANAN)));
+                modelMakanan.setImageFood(cursor.getString(cursor.getColumnIndex(COLUMN_GAMBAR_MAKANAN)));
+                modelMakanan.setRecipeFood(cursor.getString(cursor.getColumnIndex(COLUMN_RESEP_MAKANAN)));
                 makananLinkedList.add(modelMakanan);
             } while (cursor.moveToNext());
         }
@@ -79,18 +72,18 @@ public class DBase extends SQLiteOpenHelper {
     /**
      * Query only 1 record
      **/
-    public ModelMakanan getMakanan(long nama) {
+    public ModelFood getMakanan(long nama) {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT  * FROM " + TABLE_NAME + " WHERE nama_makanan=" + /*PAKE LIKE QUERY*/ nama;
         @SuppressLint("Recycle") Cursor cursor = db.rawQuery(query, null);
 
-        ModelMakanan receivedMakanan = new ModelMakanan();
+        ModelFood receivedMakanan = new ModelFood();
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
 
-            receivedMakanan.setNama_makanan(cursor.getString(cursor.getColumnIndex(COLUMN_NAMA_MAKANAN)));
-            receivedMakanan.setGambar_makanan(cursor.getString(cursor.getColumnIndex(COLUMN_GAMBAR_MAKANAN)));
-            receivedMakanan.setResep_makanan(cursor.getString(cursor.getColumnIndex(COLUMN_RESEP_MAKANAN)));
+            receivedMakanan.setNameFood(cursor.getString(cursor.getColumnIndex(COLUMN_NAMA_MAKANAN)));
+            receivedMakanan.setImageFood(cursor.getString(cursor.getColumnIndex(COLUMN_GAMBAR_MAKANAN)));
+            receivedMakanan.setRecipeFood(cursor.getString(cursor.getColumnIndex(COLUMN_RESEP_MAKANAN)));
         }
         return receivedMakanan;
     }

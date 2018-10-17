@@ -14,30 +14,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.gson.GsonBuilder;
-import com.like.LikeButton;
-import com.like.OnLikeListener;
 import com.varunest.sparkbutton.SparkButton;
 import com.varunest.sparkbutton.SparkEventListener;
 
-import java.util.HashMap;
 import java.util.List;
 
-import dev.ri0arjuna.resepmamiapps.ModelTopFood;
+import dev.ri0arjuna.resepmamiapps.model.ModelTopFood;
 import dev.ri0arjuna.resepmamiapps.R;
 import dev.ri0arjuna.resepmamiapps.activity.DetailMakananActivity;
 import dev.ri0arjuna.resepmamiapps.db.DBase;
-import dev.ri0arjuna.resepmamiapps.model.ModelMakanan;
+import dev.ri0arjuna.resepmamiapps.model.ModelFood;
 
 import static dev.ri0arjuna.resepmamiapps.db.DBase.COLUMN_GAMBAR_MAKANAN;
 import static dev.ri0arjuna.resepmamiapps.db.DBase.COLUMN_ID;
@@ -68,19 +59,19 @@ public class AdapterTopView extends RecyclerView.Adapter<AdapterTopView.ViewHold
 
         dBase = new DBase(context.getApplicationContext());
 
-        final int fav = modelMakanan.getFavorited();
-        final int id = modelMakanan.getId();
-        final String nama_makanan = modelMakanan.getNama_makanan();
-        final String gambar_makanan = modelMakanan.getGambar_makanan();
-        final String resep_makanan = modelMakanan.getResep_makanan();
+        final int fav = modelMakanan.getFavoritedFood();
+        final int id = modelMakanan.getIdFood();
+        final String nama_makanan = modelMakanan.getNameFood();
+        final String gambar_makanan = modelMakanan.getImageFood();
+        final String resep_makanan = modelMakanan.getRecipeFood();
 
         holder.favoriteButton.setChecked(false);
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         final SharedPreferences.Editor editor = preferences.edit();
 
         try {
-            if (preferences.contains(String.valueOf(modelMakanan.getId())) &&
-                    preferences.getBoolean(String.valueOf(modelMakanan.getId()), false)) {
+            if (preferences.contains(String.valueOf(modelMakanan.getIdFood())) &&
+                    preferences.getBoolean(String.valueOf(modelMakanan.getIdFood()), false)) {
                 holder.favoriteButton.setChecked(true);
             } else {
                 holder.favoriteButton.setChecked(false);
@@ -98,16 +89,16 @@ public class AdapterTopView extends RecyclerView.Adapter<AdapterTopView.ViewHold
 
                     SQLiteDatabase db = dBase.getWritableDatabase();
                     ContentValues values = new ContentValues();
-                    values.put(COLUMN_ID, modelMakanan.getId());
-                    values.put(COLUMN_NAMA_MAKANAN, modelMakanan.getNama_makanan());
-                    values.put(COLUMN_GAMBAR_MAKANAN, modelMakanan.getGambar_makanan());
-                    values.put(COLUMN_RESEP_MAKANAN, modelMakanan.getResep_makanan());
+                    values.put(COLUMN_ID, modelMakanan.getIdFood());
+                    values.put(COLUMN_NAMA_MAKANAN, modelMakanan.getNameFood());
+                    values.put(COLUMN_GAMBAR_MAKANAN, modelMakanan.getImageFood());
+                    values.put(COLUMN_RESEP_MAKANAN, modelMakanan.getRecipeFood());
 
                     // insert
                     db.insert(TABLE_NAME, null, values);
                     db.close();
 
-                    editor.putBoolean(String.valueOf(modelMakanan.getId()), true);
+                    editor.putBoolean(String.valueOf(modelMakanan.getIdFood()), true);
                     editor.apply();
                 } else{
                     final int count = fav - 1;
@@ -115,9 +106,9 @@ public class AdapterTopView extends RecyclerView.Adapter<AdapterTopView.ViewHold
 
                     SQLiteDatabase db = dBase.getWritableDatabase();
 
-                    db.execSQL("DELETE FROM " + TABLE_NAME + " WHERE _id='" + modelMakanan.getId() + "'");
+                    db.execSQL("DELETE FROM " + TABLE_NAME + " WHERE _id='" + modelMakanan.getIdFood() + "'");
 
-                    editor.putBoolean(String.valueOf(modelMakanan.getId()), false);
+                    editor.putBoolean(String.valueOf(modelMakanan.getIdFood()), false);
                     editor.apply();
                 }
             }
@@ -132,7 +123,7 @@ public class AdapterTopView extends RecyclerView.Adapter<AdapterTopView.ViewHold
             }
         });
 
-        String str = modelMakanan.getNama_makanan();
+        String str = modelMakanan.getNameFood();
         String[] strArray = str.split(" ");
         StringBuilder builder = new StringBuilder();
         for (String s : strArray) {
@@ -140,10 +131,10 @@ public class AdapterTopView extends RecyclerView.Adapter<AdapterTopView.ViewHold
             builder.append(cap + " ");
         }
 
-        holder.textViewFav.setText("Ranked: " + String.valueOf(modelMakanan.getFavorited()));
+        holder.textViewFav.setText("Ranked: " + String.valueOf(modelMakanan.getFavoritedFood()));
         holder.textViewTitleFood.setText(builder.toString());
         Glide.with(context)
-                .load(modelMakanan.getGambar_makanan())
+                .load(modelMakanan.getImageFood())
                 .into(holder.imageViewPosterFood);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,7 +149,7 @@ public class AdapterTopView extends RecyclerView.Adapter<AdapterTopView.ViewHold
 
     private void updateFav(String nama_makanan, String resep_makanan, String gambar_makanan, int id, int count) {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Makanan");
-        ModelMakanan modelMakanan = new ModelMakanan(nama_makanan, resep_makanan, gambar_makanan, id, count);
+        ModelFood modelMakanan = new ModelFood(nama_makanan, resep_makanan, gambar_makanan, id, count);
 
         databaseReference.child(String.valueOf(id)).setValue(modelMakanan);
     }

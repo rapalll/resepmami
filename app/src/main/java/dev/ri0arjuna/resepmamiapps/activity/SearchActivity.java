@@ -16,7 +16,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -25,14 +24,14 @@ import java.util.Objects;
 
 import dev.ri0arjuna.resepmamiapps.R;
 import dev.ri0arjuna.resepmamiapps.adapter.AdapterMakanan;
-import dev.ri0arjuna.resepmamiapps.model.ModelMakanan;
+import dev.ri0arjuna.resepmamiapps.model.ModelFood;
 
 public class SearchActivity extends AppCompatActivity {
 
     String nama_makanan, gambar_makanan, resep_makanan;
     int id;
     DatabaseReference mRef;
-    List<ModelMakanan> list_search;
+    List<ModelFood> list_search;
     RecyclerView recyclerView;
     Toolbar toolbar;
     String search = "";
@@ -78,18 +77,18 @@ public class SearchActivity extends AppCompatActivity {
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     Log.w("Firebase: ", "loadDataKonten()");
 
-                    ModelMakanan value = dataSnapshot1.getValue(ModelMakanan.class);
-                    ModelMakanan fire = new ModelMakanan();
+                    ModelFood value = dataSnapshot1.getValue(ModelFood.class);
+                    ModelFood fire = new ModelFood();
 
-                    nama_makanan = value != null ? value.getNama_makanan() : null;
-                    gambar_makanan = value != null ? value.getGambar_makanan() : null;
-                    resep_makanan = value != null ? value.getResep_makanan() : null;
-                    id = value != null ? value.getId() : 0;
+                    nama_makanan = value != null ? value.getNameFood() : null;
+                    gambar_makanan = value != null ? value.getImageFood() : null;
+                    resep_makanan = value != null ? value.getRecipeFood() : null;
+                    id = value != null ? value.getIdFood() : 0;
 
-                    fire.setNama_makanan(nama_makanan);
-                    fire.setGambar_makanan(gambar_makanan);
-                    fire.setResep_makanan(resep_makanan);
-                    fire.setId(id);
+                    fire.setNameFood(nama_makanan);
+                    fire.setImageFood(gambar_makanan);
+                    fire.setRecipeFood(resep_makanan);
+                    fire.setIdFood(id);
 
                     list_search.add(fire);
 
@@ -114,8 +113,8 @@ public class SearchActivity extends AppCompatActivity {
 //                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
 //                    Log.w("Firebase: ", "loadDataKonten()");
 //
-//                    ModelMakanan value = dataSnapshot1.getValue(ModelMakanan.class);
-//                    ModelMakanan fire = new ModelMakanan();
+//                    ModelFood value = dataSnapshot1.getValue(ModelFood.class);
+//                    ModelFood fire = new ModelFood();
 //
 //                    nama_makanan = value != null ? value.getNama_makanan() : null;
 //                    gambar_makanan = value != null ? value.getGambar_makanan() : null;
