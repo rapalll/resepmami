@@ -43,15 +43,15 @@
                 android:textStyle="bold"
                 apps:text="AYAM RICA-RICA" />
 
-            <com.varunest.sparkbutton.SparkButton
-                android:id="@+id/spark_button"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                app:sparkbutton_activeImage="@drawable/ic_favorite"
-                app:sparkbutton_iconSize="24dp"
-                app:sparkbutton_inActiveImage="@drawable/ic_favorite_border"
-                app:sparkbutton_primaryColor="@color/colorRed"
-                app:sparkbutton_secondaryColor="@color/colorRedDark" />
+            <!--<com.varunest.sparkbutton.SparkButton-->
+                <!--android:id="@+id/spark_button"-->
+                <!--android:layout_width="40dp"-->
+                <!--android:layout_height="40dp"-->
+                <!--app:sparkbutton_activeImage="@drawable/ic_favorite"-->
+                <!--app:sparkbutton_iconSize="24dp"-->
+                <!--app:sparkbutton_inActiveImage="@drawable/ic_favorite_border"-->
+                <!--app:sparkbutton_primaryColor="@color/colorRed"-->
+                <!--app:sparkbutton_secondaryColor="@color/colorRedDark" />-->
         </LinearLayout>
     </RelativeLayout>
 

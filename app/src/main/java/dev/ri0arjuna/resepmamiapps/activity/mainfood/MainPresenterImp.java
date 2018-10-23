@@ -1,4 +1,4 @@
-package dev.ri0arjuna.resepmamiapps.activity.main;
+package dev.ri0arjuna.resepmamiapps.activity.mainfood;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
