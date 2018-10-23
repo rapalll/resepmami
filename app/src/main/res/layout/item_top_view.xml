@@ -42,15 +42,15 @@
             android:layout_centerVertical="true"
             android:text="99" />
 
-        <com.varunest.sparkbutton.SparkButton
-        android:id="@+id/spark_button"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_alignParentEnd="true"
-        app:sparkbutton_activeImage="@drawable/ic_favorite"
-        app:sparkbutton_iconSize="24dp"
-        app:sparkbutton_inActiveImage="@drawable/ic_favorite_border"
-        app:sparkbutton_primaryColor="@color/colorRed"
-        app:sparkbutton_secondaryColor="@color/colorRedDark" />
+        <!--<com.varunest.sparkbutton.SparkButton-->
+            <!--android:id="@+id/spark_button"-->
+            <!--android:layout_width="80dp"-->
+            <!--android:layout_height="80dp"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--app:sparkbutton_activeImage="@drawable/ic_favorite"-->
+            <!--app:sparkbutton_iconSize="24dp"-->
+            <!--app:sparkbutton_inActiveImage="@drawable/ic_favorite_border"-->
+            <!--app:sparkbutton_primaryColor="@color/colorRed"-->
+            <!--app:sparkbutton_secondaryColor="@color/colorRedDark" />-->
     </RelativeLayout>
 </android.support.v7.widget.CardView>

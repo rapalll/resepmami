@@ -24,7 +24,7 @@ import com.varunest.sparkbutton.SparkEventListener;
 import java.util.List;
 
 import dev.ri0arjuna.resepmamiapps.R;
-import dev.ri0arjuna.resepmamiapps.activity.DetailMakananActivity;
+import dev.ri0arjuna.resepmamiapps.activity.detailfood.DetailFoodActivity;
 import dev.ri0arjuna.resepmamiapps.db.DBase;
 import dev.ri0arjuna.resepmamiapps.model.ModelFood;
 
@@ -33,7 +33,7 @@ import static dev.ri0arjuna.resepmamiapps.db.DBase.TABLE_NAME;
 public class AdapterFavorite extends RecyclerView.Adapter<AdapterFavorite.HolderFavorite> {
     private List<ModelFood> makananList;
     private Context context;
-    private DBase dBase;
+//    private DBase dBase;
     private RecyclerView mRecyclerV;
 
     public AdapterFavorite(List<ModelFood> makananList, Context context, RecyclerView mRecyclerView) {
@@ -45,7 +45,7 @@ public class AdapterFavorite extends RecyclerView.Adapter<AdapterFavorite.Holder
     @NonNull
     @Override
     public AdapterFavorite.HolderFavorite onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        dBase = new DBase(context.getApplicationContext());
+//        dBase = new DBase(context.getApplicationContext());
 
         View view = LayoutInflater.from(context).inflate(R.layout.item_favorite, parent, false);
         return new HolderFavorite(view);
@@ -55,58 +55,58 @@ public class AdapterFavorite extends RecyclerView.Adapter<AdapterFavorite.Holder
     public void onBindViewHolder(@NonNull final AdapterFavorite.HolderFavorite holder, @SuppressLint("RecyclerView") final int position) {
         final ModelFood modelMakanan = makananList.get(position);
 
-        holder.favoriteButton.setChecked(false);
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        final SharedPreferences.Editor editor = preferences.edit();
-
-        try {
-            if (preferences.contains(String.valueOf(modelMakanan.getIdFood())) &&
-                    preferences.getBoolean(String.valueOf(modelMakanan.getIdFood()), false)) {
-                holder.favoriteButton.setChecked(true);
-            } else {
-                holder.favoriteButton.setChecked(false);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        holder.favoriteButton.setEventListener(new SparkEventListener() {
-            @Override
-            public void onEvent(ImageView button, boolean buttonState) {
-                if (buttonState) {
-                    editor.putBoolean(String.valueOf(modelMakanan.getIdFood()), true);
-                    editor.apply();
-                } else {
-                    SQLiteDatabase db = dBase.getWritableDatabase();
-
-                    db.execSQL("DELETE FROM " + TABLE_NAME + " WHERE _id='" + modelMakanan.getIdFood() + "'");
-
-                    makananList.remove(position);
-                    notifyItemRangeChanged(holder.getAdapterPosition(), makananList.size());
-                    notifyDataSetChanged();
-
-                    editor.putBoolean(String.valueOf(modelMakanan.getIdFood()), false);
-                    editor.apply();
-                }
-            }
-
-            @Override
-            public void onEventAnimationEnd(ImageView button, boolean buttonState) {
-
-            }
-
-            @Override
-            public void onEventAnimationStart(ImageView button, boolean buttonState) {
-
-            }
-        });
+//        holder.favoriteButton.setChecked(false);
+//        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+//        final SharedPreferences.Editor editor = preferences.edit();
+//
+//        try {
+//            if (preferences.contains(String.valueOf(modelMakanan.getIdFood())) &&
+//                    preferences.getBoolean(String.valueOf(modelMakanan.getIdFood()), false)) {
+//                holder.favoriteButton.setChecked(true);
+//            } else {
+//                holder.favoriteButton.setChecked(false);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        holder.favoriteButton.setEventListener(new SparkEventListener() {
+//            @Override
+//            public void onEvent(ImageView button, boolean buttonState) {
+//                if (buttonState) {
+//                    editor.putBoolean(String.valueOf(modelMakanan.getIdFood()), true);
+//                    editor.apply();
+//                } else {
+//                    SQLiteDatabase db = dBase.getWritableDatabase();
+//
+//                    db.execSQL("DELETE FROM " + TABLE_NAME + " WHERE _id='" + modelMakanan.getIdFood() + "'");
+//
+//                    makananList.remove(position);
+//                    notifyItemRangeChanged(holder.getAdapterPosition(), makananList.size());
+//                    notifyDataSetChanged();
+//
+//                    editor.putBoolean(String.valueOf(modelMakanan.getIdFood()), false);
+//                    editor.apply();
+//                }
+//            }
+//
+//            @Override
+//            public void onEventAnimationEnd(ImageView button, boolean buttonState) {
+//
+//            }
+//
+//            @Override
+//            public void onEventAnimationStart(ImageView button, boolean buttonState) {
+//
+//            }
+//        });
 
         String str = modelMakanan.getNameFood();
         String[] strArray = str.split(" ");
         StringBuilder builder = new StringBuilder();
         for (String s : strArray) {
             String cap = s.substring(0, 1).toUpperCase() + s.substring(1);
-            builder.append(cap + " ");
+            builder.append(cap).append(" ");
         }
 
         holder.textViewTitleFood.setText(builder.toString());
@@ -117,7 +117,7 @@ public class AdapterFavorite extends RecyclerView.Adapter<AdapterFavorite.Holder
             @Override
             public void onClick(View v) {
                 ModelFood data = makananList.get(position);
-                Intent intent = new Intent(context, DetailMakananActivity.class);
+                Intent intent = new Intent(context, DetailFoodActivity.class);
                 intent.putExtra("detail_makanan", new GsonBuilder().create().toJson(data));
                 holder.itemView.getContext().startActivity(intent);
             }
@@ -150,13 +150,13 @@ public class AdapterFavorite extends RecyclerView.Adapter<AdapterFavorite.Holder
     class HolderFavorite extends RecyclerView.ViewHolder {
         TextView textViewTitleFood;
         ImageView imageViewPosterFood;
-        SparkButton favoriteButton;
+//        SparkButton favoriteButton;
 
         HolderFavorite(View itemView) {
             super(itemView);
             textViewTitleFood = itemView.findViewById(R.id.title_food);
             imageViewPosterFood = itemView.findViewById(R.id.image_poster);
-            favoriteButton = itemView.findViewById(R.id.spark_button);
+//            favoriteButton = itemView.findViewById(R.id.spark_button);
         }
     }
 }

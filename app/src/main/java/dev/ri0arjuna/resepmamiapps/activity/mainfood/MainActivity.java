@@ -1,4 +1,4 @@
-package dev.ri0arjuna.resepmamiapps.activity.main;
+package dev.ri0arjuna.resepmamiapps.activity.mainfood;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -21,17 +21,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dev.ri0arjuna.resepmamiapps.R;
-import dev.ri0arjuna.resepmamiapps.activity.FavoriteActivity;
+import dev.ri0arjuna.resepmamiapps.activity.favoritefood.FavoriteActivity;
 import dev.ri0arjuna.resepmamiapps.activity.InfoActivity;
-import dev.ri0arjuna.resepmamiapps.activity.TopFoodActivity;
-import dev.ri0arjuna.resepmamiapps.adapter.AdapterMakanan;
+import dev.ri0arjuna.resepmamiapps.activity.topfood.TopFoodActivity;
+import dev.ri0arjuna.resepmamiapps.adapter.AdapterFood;
 import dev.ri0arjuna.resepmamiapps.model.ModelFood;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, MainView {
 
     private RecyclerView recyclerView;
-    private AdapterMakanan adapterMakanan;
+    private AdapterFood adapterMakanan;
     private List<ModelFood> modelFoodList = new ArrayList<>();
     private ProgressDialog progressDialog;
     private MaterialSearchView searchView;
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void setupData() {
-        adapterMakanan = new AdapterMakanan(modelFoodList, MainActivity.this);
+        adapterMakanan = new AdapterFood(modelFoodList, MainActivity.this);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 2));
         recyclerView.setAdapter(adapterMakanan);
