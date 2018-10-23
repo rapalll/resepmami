@@ -15,7 +15,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.github.barteksc.pdfviewer.PDFView;
 import com.google.firebase.database.DatabaseReference;
@@ -56,8 +55,6 @@ public class DetailFoodActivity extends AppCompatActivity
     private DBase dBase;
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
-    private int id, fav;
-    private String nama_makanan, gambar_makanan, resep_makanan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,8 +156,6 @@ public class DetailFoodActivity extends AppCompatActivity
         rotateLoading = new RotateLoading(this);
         modelFood = new GsonBuilder().create().fromJson(getIntent().getStringExtra("detail_makanan"), ModelFood.class);
 
-        Toast.makeText(this, ""+modelFood.getNameFood() + modelFood.getFavoritedFood(), Toast.LENGTH_SHORT).show();
-
         uri = Uri.parse(modelFood.getRecipeFood());
         dBase = new DBase(this);
     }
@@ -182,11 +177,11 @@ public class DetailFoodActivity extends AppCompatActivity
 
     @Override
     public void onEvent(ImageView button, boolean buttonState) {
-        fav = modelFood.getFavoritedFood();
-        id = modelFood.getIdFood();
-        nama_makanan = modelFood.getNameFood();
-        gambar_makanan = modelFood.getImageFood();
-        resep_makanan = modelFood.getRecipeFood();
+        int fav = modelFood.getFavoritedFood();
+        int id = modelFood.getIdFood();
+        String nama_makanan = modelFood.getNameFood();
+        String gambar_makanan = modelFood.getImageFood();
+        String resep_makanan = modelFood.getRecipeFood();
 
         if (buttonState) {
             final int count = fav + 1;
